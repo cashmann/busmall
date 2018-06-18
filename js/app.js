@@ -41,20 +41,30 @@ function chooseProducts(){
       randNum = Math.ceil(Math.random()*(Product.all.length-1));
     }
     selectedNums.push(randNum);
-    targetEl.innerHTML= "<img src='"+Product.all[randNum].picPath +"'/>";
+    targetEl.innerHTML= '<img src=\''+Product.all[randNum].picPath +'\'/>';
     Product.all[randNum].displayCount++;
   }
   picEls[0].onclick = function(){
     Product.all[selectedNums[0]].clickCount++;
     console.log(Product.all[selectedNums[0]].clickCount);
-  }
+  };
   picEls[1].onclick = function(){
     Product.all[selectedNums[1]].clickCount++;
     console.log(Product.all[selectedNums[1]].clickCount);
-  }
+  };
   picEls[2].onclick = function(){
     Product.all[selectedNums[2]].clickCount++;
     console.log(Product.all[selectedNums[2]].clickCount);
+  };
+}
+
+function renderResults(){
+  var resultEl = document.querySelector('#results');
+  
+  for(var i=0; i<Product.all.length; i++){
+    var li = document.createElement('li');
+    li.innerText = Product.all[i].name + ': clicks= ' + Product.all[i].clickCount + ' displays= ' + Product.all[i].displayCount;
+    resultEl.appendChild(li);
   }
 }
 
@@ -63,7 +73,8 @@ function handleSubmit(event){
   event.preventDefault();
   chooseProducts();
   if (i===25){
-    form.removeEventListener('submit', handleSubmit());
+    form.removeEventListener('submit', handleSubmit);
+    renderResults();
   }
   i++;
   console.log(i);
