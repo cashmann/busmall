@@ -1,0 +1,95 @@
+header img, h1{
+  display: inline-block;
+}
+
+header img{
+  float: left;
+  margin-right: 1%;
+  margin-left: 2%;
+}
+
+nav{
+  float: right;
+  width: 40%;
+}
+
+nav ul{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  height: 65px;
+  width: 100%;
+  list-style: none;
+}
+
+nav ul li{
+  float: left;
+  vertical-align: middle;
+  margin: 0;
+  width: 20%;
+  box-sizing: border-box;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 25% 25% 0 0;
+}
+
+.current{
+  background: #ccc;
+}
+
+nav ul li:hover{
+  background: #ccc;
+}
+
+nav ul a{
+  display: block;
+  text-decoration: none;
+  color: black;
+  line-height: 65px;
+}
+
+aside{
+  float: left;
+  border: solid 1px black;
+  width: 15%;
+  height: 500px;
+  margin: 2%;
+  margin-bottom: 100px;
+}
+
+section{
+  float: right;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+fieldset{
+  padding: 0;
+  border: none;
+}
+
+label img{
+  max-height: 450px;
+  max-width: 100%;
+}
+
+td{
+  border: 1px solid black;
+}
+
+input[type=submit]{
+  width: 80%;
+  margin: 0 10%;
+}
+
+footer{
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  text-align: center;
+  background: #666;
+}
