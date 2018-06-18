@@ -23,18 +23,23 @@ new Product('Pen', 1, 'img/pen.jpg');
 new Product('Pet-sweep', 1, 'img/pet-sweep.jpg');
 new Product('Scissors', 1, 'img/scissors.jpg');
 new Product('Shark', 1, 'img/shark.jpg');
-new Product('Sweep', 1, 'img/sweep.jpg');
+new Product('Sweep', 1, 'img/sweep.png');
 new Product('Tauntaun', 1, 'img/tauntaun.jpg');
 new Product('Unicorn', 1, 'img/unicorn.jpg');
-new Product('USB', 1, 'img/usb.jpg');
+new Product('USB', 1, 'img/usb.gif');
 new Product('Water-can', 1, 'img/water-can.jpg');
 new Product('Wine-glass', 1, 'img/wine-glass.jpg');
 
 function chooseProducts(){
   var picEls = document.querySelectorAll('label');
+  var selectedNums = [];
   for(var i=0; i<(picEls.length); i++){
     var targetEl = picEls[i];
     var randNum = Math.ceil(Math.random()*(Product.all.length-1));
+    while (selectedNums.includes(randNum)){
+      randNum = Math.ceil(Math.random()*(Product.all.length-1));
+    }
+    selectedNums.push(randNum);
     targetEl.innerHTML= "<img src='"+Product.all[randNum].picPath +"'/>";
   }
 }
