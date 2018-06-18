@@ -4,6 +4,7 @@ function Product(name, catalogNumber, picPath){
   this.picPath = picPath;
   this.displayCount = 0;
   this.clickCount = 0;
+
   Product.all.push(this);
 }
 
@@ -41,5 +42,34 @@ function chooseProducts(){
     }
     selectedNums.push(randNum);
     targetEl.innerHTML= "<img src='"+Product.all[randNum].picPath +"'/>";
+    Product.all[randNum].displayCount++;
+  }
+  picEls[0].onclick = function(){
+    Product.all[selectedNums[0]].clickCount++;
+    console.log(Product.all[selectedNums[0]].clickCount);
+  }
+  picEls[1].onclick = function(){
+    Product.all[selectedNums[1]].clickCount++;
+    console.log(Product.all[selectedNums[1]].clickCount);
+  }
+  picEls[2].onclick = function(){
+    Product.all[selectedNums[2]].clickCount++;
+    console.log(Product.all[selectedNums[2]].clickCount);
   }
 }
+
+var i = 0;
+function handleSubmit(event){
+  event.preventDefault();
+  chooseProducts();
+  if (i===25){
+    form.removeEventListener('submit', handleSubmit());
+  }
+  i++;
+  console.log(i);
+}
+
+var form = document.querySelector('form');
+form.addEventListener('submit', handleSubmit);
+
+chooseProducts();
