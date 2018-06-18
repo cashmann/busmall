@@ -1,5 +1,6 @@
 header img, h1{
   display: inline-block;
+  font-size: 3vw;
 }
 
 header img{
@@ -47,6 +48,7 @@ nav ul a{
   text-decoration: none;
   color: black;
   line-height: 65px;
+  font-size: 1.5vw;
 }
 
 aside{
@@ -76,6 +78,11 @@ label img{
 
 td{
   border: 1px solid black;
+}
+
+.products td{
+  height: 450px;
+  width: 360px;
 }
 
 input[type=submit]{
