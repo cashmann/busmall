@@ -126,8 +126,10 @@ function handleSubmit(event){
   event.preventDefault();
   chooseProducts();
   if (i===25){
+    console.log('removing event listner...');
     form.removeEventListener('submit', handleSubmit);
     renderResults();
+    showChart();
   }
   i++;
   console.log(i);
