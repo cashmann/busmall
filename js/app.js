@@ -1,6 +1,5 @@
-function Product(name, catalogNumber, picPath){
+function Product(name, picPath){
   this.name = name;
-  this.catalogNumber = catalogNumber;
   this.picPath = picPath;
   this.displayCount = 0;
   this.clickCount = 0;
@@ -10,57 +9,72 @@ function Product(name, catalogNumber, picPath){
 
 Product.all = [];
 
-new Product('Bag', 1, 'img/bag.jpg');
-new Product('Banana', 1, 'img/banana.jpg');
-new Product('Bathroom', 1, 'img/bathroom.jpg');
-new Product('Boots', 1, 'img/boots.jpg');
-new Product('Breakfast', 1, 'img/breakfast.jpg');
-new Product('Bubblegum', 1, 'img/bubblegum.jpg');
-new Product('Chair', 1, 'img/chair.jpg');
-new Product('Cthulhu', 1, 'img/cthulhu.jpg');
-new Product('Dog-duck', 1, 'img/dog-duck.jpg');
-new Product('Dragon', 1, 'img/dragon.jpg');
-new Product('Pen', 1, 'img/pen.jpg');
-new Product('Pet-sweep', 1, 'img/pet-sweep.jpg');
-new Product('Scissors', 1, 'img/scissors.jpg');
-new Product('Shark', 1, 'img/shark.jpg');
-new Product('Sweep', 1, 'img/sweep.png');
-new Product('Tauntaun', 1, 'img/tauntaun.jpg');
-new Product('Unicorn', 1, 'img/unicorn.jpg');
-new Product('USB', 1, 'img/usb.gif');
-new Product('Water-can', 1, 'img/water-can.jpg');
-new Product('Wine-glass', 1, 'img/wine-glass.jpg');
+var voteCount= 0;
+
+new Product('Bag', 'img/bag.jpg');
+new Product('Banana', 'img/banana.jpg');
+new Product('Bathroom', 'img/bathroom.jpg');
+new Product('Boots', 'img/boots.jpg');
+new Product('Breakfast', 'img/breakfast.jpg');
+new Product('Bubblegum', 'img/bubblegum.jpg');
+new Product('Chair', 'img/chair.jpg');
+new Product('Cthulhu', 'img/cthulhu.jpg');
+new Product('Dog-duck', 'img/dog-duck.jpg');
+new Product('Dragon', 'img/dragon.jpg');
+new Product('Pen', 'img/pen.jpg');
+new Product('Pet-sweep', 'img/pet-sweep.jpg');
+new Product('Scissors', 'img/scissors.jpg');
+new Product('Shark', 'img/shark.jpg');
+new Product('Sweep', 'img/sweep.png');
+new Product('Tauntaun', 'img/tauntaun.jpg');
+new Product('Unicorn', 'img/unicorn.jpg');
+new Product('USB', 'img/usb.gif');
+new Product('Water-can', 'img/water-can.jpg');
+new Product('Wine-glass', 'img/wine-glass.jpg');
 
 function chooseProducts(){
-  var picEls = document.querySelectorAll('label');
+  var picEls = document.querySelectorAll('.products td img');
   var selectedNums = [];
   for(var i=0; i<(picEls.length); i++){
     var targetEl = picEls[i];
-    var randNum = Math.ceil(Math.random()*(Product.all.length-1));
-    while (selectedNums.includes(randNum)){
-      randNum = Math.ceil(Math.random()*(Product.all.length-1));
+
+    var selectedProdNum = Math.ceil(Math.random()*(Product.all.length)-1);
+    while (selectedNums.includes(selectedProdNum)){
+      selectedProdNum = Math.ceil(Math.random()*(Product.all.length)-1);
     }
-    selectedNums.push(randNum);
-    targetEl.innerHTML= '<img src=\''+Product.all[randNum].picPath +'\'/>';
-    Product.all[randNum].displayCount++;
+    selectedNums.push(selectedProdNum);
+
+    var selectedProd = Product.all[selectedProdNum];
+    targetEl.selectedProd = selectedProd;
+    targetEl.src= selectedProd.picPath;
+    selectedProd.displayCount++;
   }
-  picEls[0].onclick = function(){
-    Product.all[selectedNums[0]].clickCount++;
-    console.log(Product.all[selectedNums[0]].clickCount);
-  };
-  picEls[1].onclick = function(){
-    Product.all[selectedNums[1]].clickCount++;
-    console.log(Product.all[selectedNums[1]].clickCount);
-  };
-  picEls[2].onclick = function(){
-    Product.all[selectedNums[2]].clickCount++;
-    console.log(Product.all[selectedNums[2]].clickCount);
-  };
 }
+
+var productImages = document.querySelectorAll('.products td img');
+var table = document.querySelector('table');
+for(var j=0; j<productImages.length; j++){
+  if(voteCount !== 25){
+    productImages[j].addEventListener('click', function(event){
+      console.log(event.target.selectedProd);
+      event.target.selectedProd.clickCount++;
+      console.log(event.target.selectedProd.clickCount);
+      voteCount++;
+      if (voteCount === 25){
+        table.style.display = 'none';
+        renderResults();
+        showChart();
+        return;
+      }
+      chooseProducts();
+    });
+  }
+}
+
 
 function renderResults(){
   var resultEl = document.querySelector('#results');
-  
+
   for(var i=0; i<Product.all.length; i++){
     var li = document.createElement('li');
     li.innerText = Product.all[i].name + ': clicks= ' + Product.all[i].clickCount + ' displays= ' + Product.all[i].displayCount;
@@ -121,21 +135,25 @@ function showChart(){
   });
 }
 
-var i = 0;
+/*var i = 1;
 function handleSubmit(event){
   event.preventDefault();
-  chooseProducts();
-  if (i===25){
+  console.log('handleSubmit', event.targetEl.selectedNum);
+  var table = document.querySelector('table');
+  if (i===2){
     console.log('removing event listner...');
-    form.removeEventListener('submit', handleSubmit);
+    table.style.display = 'none';
     renderResults();
     showChart();
+    form.removeEventListener('submit', handleSubmit);
   }
   i++;
   console.log(i);
-}
+  if(i !== 25){
+    chooseProducts();
+  }
+}*/
 
-var form = document.querySelector('form');
-form.addEventListener('submit', handleSubmit);
+
 
 window.addEventListener('load', chooseProducts);

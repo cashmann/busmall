@@ -71,10 +71,6 @@ section{
   box-sizing: border-box;
 }
 
-fieldset{
-  padding: 0;
-  border: none;
-}
 
 label img{
   max-height: 450px;
@@ -90,13 +86,17 @@ td{
   width: 360px;
 }
 
-input[type=submit]{
-  width: 80%;
-  margin: 0 10%;
+td img{
+  width: 100%;
+  height: 100%;
 }
+
 
 #canvasChart{
   display: none;
+  float: right;
+  width: 80% !important;
+  box-sizing: border-box;
 }
 
 footer{
