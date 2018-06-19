@@ -68,6 +68,59 @@ function renderResults(){
   }
 }
 
+function showChart(){
+  var canvas = document.querySelector('#canvasChart');
+  canvas.style.display = 'block';
+  var labels = [];
+  var voteCounts = [];
+  var displayCounts = [];
+  var votePercentages = [];
+  for(var i = 0; i<Product.all.length; i++){
+    labels[i]=Product.all[i].name;
+    voteCounts[i]=Product.all[i].clickCount;
+    displayCounts[i]=Product.all[i].displayCount;
+    votePercentages[i]=100*voteCounts[i]/displayCounts[i];
+  }
+  var ctx = canvas.getContext('2d');
+  var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Vote Count',
+          backgroundColor: 'rgba(94, 255, 147, 0.8)',
+          data: voteCounts
+        },
+        {
+          label: 'Display Count',
+          backgroundColor: 'rgba(255, 148, 94, 0.8)',
+          data: displayCounts
+        },
+        {
+          label: 'Vote %',
+          backgroundColor: 'rgba(255, 94, 148, 0.8)',
+          data: votePercentages
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      },
+      title: {
+        display: true,
+        text: 'Voting Results'
+      }
+    }
+  });
+}
+
 var i = 0;
 function handleSubmit(event){
   event.preventDefault();
@@ -83,4 +136,4 @@ function handleSubmit(event){
 var form = document.querySelector('form');
 form.addEventListener('submit', handleSubmit);
 
-chooseProducts();
+window.addEventListener('load', chooseProducts);
