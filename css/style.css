@@ -4,6 +4,7 @@ header img, h1{
 }
 
 header img{
+  max-width: 100%;
   float: left;
   margin-right: 1%;
   margin-left: 2%;
@@ -94,8 +95,7 @@ td img{
 
 #canvasChart{
   display: none;
-  float: right;
-  width: 80% !important;
+  width: 100% !important;
   box-sizing: border-box;
 }
 
