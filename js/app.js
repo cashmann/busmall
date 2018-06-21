@@ -1,6 +1,7 @@
 //globals Chart
 'use strict';
 
+var lastViewed = ['a'];
 var voteCount= 0;
 var productImages = document.querySelectorAll('.products td img');
 var table = document.querySelector('table');
@@ -137,7 +138,7 @@ function chooseProducts(){
     var targetEl = picEls[i];
 
     var selectedProdNum = Math.ceil(Math.random()*(Product.all.length)-1);
-    while (selectedNums.includes(selectedProdNum)){
+    while (lastViewed[0].includes(selectedProdNum) || selectedNums.includes(selectedProdNum)){
       selectedProdNum = Math.ceil(Math.random()*(Product.all.length)-1);
     }
     selectedNums.push(selectedProdNum);
@@ -147,6 +148,8 @@ function chooseProducts(){
     targetEl.src= selectedProd.picPath;
     selectedProd.displayCount++;
   }
+  lastViewed = [];
+  lastViewed.push(selectedNums);
 }
 
 
